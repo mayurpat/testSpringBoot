@@ -25,6 +25,7 @@ import com.example.demo.model.Employees;
 import com.example.demo.model.Greeting;
 
 @RestController
+@RequestMapping("/api/v1")
 public class GreetingController {
 
 	private static final String template = "Hello, %s!";
@@ -41,13 +42,13 @@ public class GreetingController {
          return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
     
-    @GetMapping(path="/employees", produces = "application/json")
+    @GetMapping(path="/greeting/employees", produces = "application/json")
     public Employees getEmployees() 
     {
         return employeeDao.getAllEmployees();
     }
      
-    @PostMapping(path= "/employees", consumes = "application/json", produces = "application/json")
+    @PostMapping(path= "/greeting/employees", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addEmployee(@RequestBody Employee employee) 
     {
         Integer id = employeeDao.getAllEmployees().getEmployeeList().size() + 1;
